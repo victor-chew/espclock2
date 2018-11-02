@@ -13,7 +13,9 @@ In V2 of the project, I am using the [WeMOS D1 Mini](https://wiki.wemos.cc/produ
 The D1 Mini is a ESP8266 development board that is chosen for its reportedly low deep sleep current. It acts as the gateway to the Internet, but will be asleep most of the time to conserve energy.
 
 The diminutive ATtiny85 is the "brain" for the clock. It communicates with the D1 Mini via I2C, and is responsible for adjusting the physical clock if conditions change. It also persists the physical clock time to the EEPROM if the battery voltage drops below a certain level. It does this by being connected to a 0.47F capacitor, which will provide sufficient power to the chip to do its thing when the battery source is depleted or removed.
-
+### Breadboard layout
+![ESPCLOCK2 Breadboard Layout](https://1.bp.blogspot.com/-3nCBVQUHuT8/W9vPFRnupZI/AAAAAAAAD0E/vNRnbg6_EngxKUC4YI0NOVqbp1MgFnL4gCLcBGAs/s1600/circuit05.png "ESPCLOCK2 Breadboard Layout")
+![ESPCLOCK2 Breadboard](https://1.bp.blogspot.com/-SSWnsH9yHp8/W9vqorXpYUI/AAAAAAAAD0Q/2Kg-jegvrMk_72UMwDycoZ3JP-M1pPB0wCLcBGAs/s1600/IMG_1411.JPG "ESPCLOCK2 Breadboard")
 ### Lessons learnt:
 In the original design, it was thought that the D1 Mini will have a current draw of only 170uA in deep sleep. In fact, this turns out to be 800uA when powered by the 5V pin.
 
