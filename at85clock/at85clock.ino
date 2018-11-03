@@ -275,6 +275,7 @@ void loop() {
     hibernate = false;
   
     // Process incoming message from i2c master (if any)
+    noInterrupts();
     switch(msg[0]) {
       case CMD_START_CLOCK:
         clock_running = true;
@@ -288,7 +289,6 @@ void loop() {
         memcpy(nettime, clocktime, sizeof(nettime));
         break;
       case CMD_SET_NETTIME:
-        cli();
         stats[9] = period; stats[10] = period >> 8;
         // Initialize period after first CMD_SET_NETTIME so that we can start tuning OCR1A
         if (period < 0) period = 0; 
@@ -309,12 +309,11 @@ void loop() {
         memcpy(stats, clocktime, sizeof(clocktime));
         memcpy(stats+3, nettime, sizeof(nettime));
         memcpy(nettime, msg+1, sizeof(nettime));
-        sei();
         break;
     }
-
     // Clear msg after processing
     memset(msg, 0, sizeof(msg));
+    interrupts();
 
     // Synchronize physical clock with network clock
     if (clock_running && timer0_op == TIMER0_NOOP) synchronizeClock();
